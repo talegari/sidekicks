@@ -1,6 +1,6 @@
-#' @title Create scale model
-#' @description Creates a scaler object containing mean and standard deviation
-#'   so that it can be used to predict on a similar dataset
+#' @title Create scaler model
+#' @description Creates a scaler object containing column means and standard
+#'   deviations so that it can be used to predict on a similar dataset
 #' @param data (numeric matrix or numeric dataframe) The dataset
 #' @param center (flag) whether to center the columns or not
 #' @param scale (flag) whether to scale the columns or not
@@ -14,7 +14,8 @@
 #'   or unscale. The scaler_ function is used to construct scaler object by
 #'   providing centering vector(alias for means of columns, ex: columnwise
 #'   medians) and scaling vector (alias for column standard deviations, ex:
-#'   columnwise mean absolute deviations)
+#'   columnwise mean absolute deviations). scaler class is meant to aid
+#'   analysis, for performance critical work use Rfast::standardize()
 #' @examples
 #' set.seed(1)
 #' n_70     = round(nrow(mtcars) * 0.7)

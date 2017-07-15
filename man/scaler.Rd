@@ -2,7 +2,7 @@
 % Please edit documentation in R/scaler.R
 \name{scaler}
 \alias{scaler}
-\title{Create scale model}
+\title{Create scaler model}
 \usage{
 scaler(data, center = TRUE, scale = TRUE)
 }
@@ -14,8 +14,8 @@ scaler(data, center = TRUE, scale = TRUE)
 \item{scale}{(flag) whether to scale the columns or not}
 }
 \description{
-Creates a scaler object containing mean and standard deviation
-  so that it can be used to predict on a similar dataset
+Creates a scaler object containing column means and standard
+  deviations so that it can be used to predict on a similar dataset
 }
 \details{
 This computes means and standard deviations of each columns and
@@ -28,7 +28,8 @@ This computes means and standard deviations of each columns and
   or unscale. The scaler_ function is used to construct scaler object by
   providing centering vector(alias for means of columns, ex: columnwise
   medians) and scaling vector (alias for column standard deviations, ex:
-  columnwise mean absolute deviations)
+  columnwise mean absolute deviations). scaler class is meant to aid
+  analysis, for performance critical work use Rfast::standardize()
 }
 \examples{
 set.seed(1)
