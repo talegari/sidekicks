@@ -7,4 +7,7 @@
 #' @importFrom stats quantile
 #' @importFrom utils file_test
 #' @importFrom lsr cramersV
+#' @import assertthat
+#' @importFrom data.table setattr
+#' @importFrom stats sd
 "_PACKAGE"
