@@ -1,11 +1,12 @@
-#' @title mem_current
-#' @description measure R session's current memory usage
+#' @title current memory usage
+#' @description measure R session's current memory usage after garbage
+#'   collection
 #' @details Do garbage collection and check current memory usage
 #' @param unit A string, either "MB"(Default) or "GB"
 #' @return A number indicating memory usage in MB (or GB)
 #' @export
 
-mem_current = function(unit = "MB"){
+mem_cur = function(unit = "MB"){
 
   stopifnot(unit %in% c("MB", "GB"))
 
@@ -17,14 +18,15 @@ mem_current = function(unit = "MB"){
          )
 }
 
-#' @title memory_max
-#' @description measure R session's maximum memory usage
+#' @title maximum memory usage
+#' @description measure R session's maximum memory usage after the last gc(reset
+#'   = TRUE) call
 #' @details Do garbage collection and check maximum memory usage
 #' @param unit A string, either "MB"(Default) or "GB"
 #' @return A number indicating memory usage in MB (or GB)
 #' @export
 
-memory_max = function(unit = "MB"){
+mem_max = function(unit = "MB"){
 
   stopifnot(unit %in% c("MB", "GB"))
 

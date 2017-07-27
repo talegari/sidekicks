@@ -38,9 +38,9 @@ index    = sample(1:nrow(mtcars), n_70)
 mtcars_A = mtcars[index, ]
 mtcars_B = mtcars[index, ]
 model    = scaler(mtcars_A)         # creates model based on mtcars_A
-mtcars_1 = predict(model, mtcars_A) # scale mtcars_A
-mtcars_2 = predict(model, mtcars_B) # scale mtcars_B using model
+mtcars_1 = predict(model, newdata = mtcars_A) # scale mtcars_A
+mtcars_2 = predict(model, newdata = mtcars_B) # scale mtcars_B using model
 class(mtcars_2)                     # does not convert to matrix
-mtcars_2_B = predict(model, mtcars_2, type = "unscale")
+mtcars_2_B = predict(model, newdata = mtcars_2, type = "unscale")
 all.equal(mtcars_2_B, mtcars_B)
 }

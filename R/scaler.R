@@ -23,10 +23,10 @@
 #' mtcars_A = mtcars[index, ]
 #' mtcars_B = mtcars[index, ]
 #' model    = scaler(mtcars_A)         # creates model based on mtcars_A
-#' mtcars_1 = predict(model, mtcars_A) # scale mtcars_A
-#' mtcars_2 = predict(model, mtcars_B) # scale mtcars_B using model
+#' mtcars_1 = predict(model, newdata = mtcars_A) # scale mtcars_A
+#' mtcars_2 = predict(model, newdata = mtcars_B) # scale mtcars_B using model
 #' class(mtcars_2)                     # does not convert to matrix
-#' mtcars_2_B = predict(model, mtcars_2, type = "unscale")
+#' mtcars_2_B = predict(model, newdata = mtcars_2, type = "unscale")
 #' all.equal(mtcars_2_B, mtcars_B)
 #' @export
 scaler            = function(data, center = TRUE, scale = TRUE){
@@ -110,35 +110,54 @@ scaler.data.frame = function(data, center = TRUE, scale = TRUE){
 
 }
 
+# predict = function(object, newdata, type = "scale"){
+#   UseMethod("predict")
+# }
+
+
 #' @title Scale a dataset using scaler model
 #' @description See \code{\link{scaler}}
 #' @param object A scaler object
-#' @param newdata A numeric matrix or a dataframe to be scaled
-#' @param type Either 'scale' or 'unscale'
+#' @param ... See details
+#' @details \itemize{
+#' \item newdata A numeric matrix or a dataframe to be scaled
+#' \item type Either 'scale' or 'unscale'
+#' }
 #' @export
-predict = function(object, newdata, type = "scale"){
-  UseMethod("predict")
-}
 
-#' @export
-predict.scaler = function(object, newdata, type = "scale"){
+predict.scaler = function(object, ...){
 
-  stopifnot(type %in% c("scale", "unscale"))
-  if(!inherits(newdata, "matrix") && !inherits(newdata, "data.frame")){
+  # assertions ----
+  args = list(...)
+
+  if(!("newdata" %in% names(args))){
+    stop("newdata is missing")
+  }
+
+  if(!inherits(args$newdata, "matrix") && !inherits(args$newdata, "data.frame")){
     stop("newdata should be integer/numeric matrix or a dataframe")
   }
 
-  if(inherits(newdata, "matrix")){
+  if(!("type" %in% names(args))){
+    type = "scale"
+  } else {
+    type = args$type
+  }
+  stopifnot(type %in% c("scale", "unscale"))
 
-    stopifnot(typeof(newdata) %in% c("integer", "double"))
-    if(ncol(newdata) != object$ncols){
+
+  # work ----
+  if(inherits(args$newdata, "matrix")){
+
+    stopifnot(typeof(args$newdata) %in% c("integer", "double"))
+    if(ncol(args$newdata) != object$ncols){
       stop("Number of columns mismatch")
     }
 
     if(type == "scale"){
 
       if(!is.null(object$col_means)){
-        scaled = sweep(newdata, 2 , object$col_means, `-`)
+        scaled = sweep(args$newdata, 2 , object$col_means, `-`)
       }
 
       if(any(object$col_sds == 0)){
@@ -162,9 +181,9 @@ predict.scaler = function(object, newdata, type = "scale"){
         )
       }
       if(!is.null(object$col_sds)){
-        unscaled = sweep(newdata, 2 , object$col_sds, `*`)
+        unscaled = sweep(args$newdata, 2 , object$col_sds, `*`)
       } else {
-        unscaled = newdata
+        unscaled = args$newdata
       }
 
       if(!is.null(object$col_means)){
@@ -175,21 +194,19 @@ predict.scaler = function(object, newdata, type = "scale"){
     }
   }
 
-  if(inherits(newdata, "data.frame")){
+  if(inherits(args$newdata, "data.frame")){
 
-    stopifnot(sapply(newdata, class) %in% c("integer", "numeric"))
+    stopifnot(sapply(args$newdata, class) %in% c("integer", "numeric"))
 
-    if(ncol(newdata) != object$ncols){
+    if(ncol(args$newdata) != object$ncols){
       stop("Number of columns mismatch")
     }
 
     if(type == "scale"){
 
       if(!is.null(object$col_means)){
-        scaled = mapply(`-`, newdata, object$col_means, SIMPLIFY = FALSE, USE.NAMES = FALSE)
-        data.table::setattr(scaled, "names", names(newdata))
-        data.table::setattr(scaled, "row.names", rownames(newdata))
-        data.table::setattr(scaled, "class", "data.frame")
+        scaled = mapply(`-`, args$newdata, object$col_means, SIMPLIFY = FALSE, USE.NAMES = FALSE)
+        data.table::setDF(scaled)
       }
 
       if(any(object$col_sds == 0)){
@@ -198,9 +215,7 @@ predict.scaler = function(object, newdata, type = "scale"){
       }
       if(!is.null(object$col_sds)){
         scaled = mapply(`/`, scaled, object$col_sds, SIMPLIFY = FALSE, USE.NAMES = FALSE)
-        data.table::setattr(scaled, "names", names(newdata))
-        data.table::setattr(scaled, "row.names", rownames(newdata))
-        data.table::setattr(scaled, "class", "data.frame")
+        data.table::setDF(scaled)
       }
 
       return(scaled)
@@ -212,19 +227,15 @@ predict.scaler = function(object, newdata, type = "scale"){
                        , "This might produce a few NAN in the resulting matrix"))
       }
       if(!is.null(object$col_sds)){
-        unscaled = mapply(`*`, newdata, object$col_sds, SIMPLIFY = FALSE, USE.NAMES = FALSE)
-        data.table::setattr(unscaled, "names", names(newdata))
-        data.table::setattr(unscaled, "row.names", rownames(newdata))
-        data.table::setattr(unscaled, "class", "data.frame")
+        unscaled = mapply(`*`, args$newdata, object$col_sds, SIMPLIFY = FALSE, USE.NAMES = FALSE)
+        data.table::setDF(unscaled)
       } else {
-        unscaled = newdata
+        unscaled = args$newdata
       }
 
       if(!is.null(object$col_means)){
         unscaled = mapply(`+`, unscaled, object$col_means, SIMPLIFY = FALSE, USE.NAMES = FALSE)
-        data.table::setattr(unscaled, "names", names(newdata))
-        data.table::setattr(unscaled, "row.names", rownames(newdata))
-        data.table::setattr(unscaled, "class", "data.frame")
+        data.table::setDF(unscaled)
       }
 
       return(unscaled)

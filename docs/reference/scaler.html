@@ -124,10 +124,12 @@
 <span class='no'>mtcars_A</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='no'>index</span>, ]
 <span class='no'>mtcars_B</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='no'>index</span>, ]
 <span class='no'>model</span>    <span class='kw'>=</span> <span class='fu'>scaler</span>(<span class='no'>mtcars_A</span>)         <span class='co'># creates model based on mtcars_A</span>
-<span class='no'>mtcars_1</span> <span class='kw'>=</span> <span class='fu'><a href='predict.html'>predict</a></span>(<span class='no'>model</span>, <span class='no'>mtcars_A</span>) <span class='co'># scale mtcars_A</span>
-<span class='no'>mtcars_2</span> <span class='kw'>=</span> <span class='fu'><a href='predict.html'>predict</a></span>(<span class='no'>model</span>, <span class='no'>mtcars_B</span>) <span class='co'># scale mtcars_B using model</span>
-<span class='fu'>class</span>(<span class='no'>mtcars_2</span>)                     <span class='co'># does not convert to matrix</span></div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='no'>mtcars_2_B</span> <span class='kw'>=</span> <span class='fu'><a href='predict.html'>predict</a></span>(<span class='no'>model</span>, <span class='no'>mtcars_2</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"unscale"</span>)
-<span class='fu'>all.equal</span>(<span class='no'>mtcars_2_B</span>, <span class='no'>mtcars_B</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='no'>mtcars_1</span> <span class='kw'>=</span> <span class='fu'>predict</span>(<span class='no'>model</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>mtcars_A</span>) <span class='co'># scale mtcars_A</span>
+<span class='no'>mtcars_2</span> <span class='kw'>=</span> <span class='fu'>predict</span>(<span class='no'>model</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>mtcars_B</span>) <span class='co'># scale mtcars_B using model</span>
+<span class='fu'>class</span>(<span class='no'>mtcars_2</span>)                     <span class='co'># does not convert to matrix</span></div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='no'>mtcars_2_B</span> <span class='kw'>=</span> <span class='fu'>predict</span>(<span class='no'>model</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>mtcars_2</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"unscale"</span>)
+<span class='fu'>all.equal</span>(<span class='no'>mtcars_2_B</span>, <span class='no'>mtcars_B</span>)</div><div class='output co'>#&gt; [1] "Names: 11 string mismatches"                                                   
+#&gt; [2] "Attributes: &lt; Component “row.names”: Modes: numeric, character &gt;"              
+#&gt; [3] "Attributes: &lt; Component “row.names”: target is numeric, current is character &gt;"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
