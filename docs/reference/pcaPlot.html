@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>jaccard_m — jaccard_m • sidekicks</title>
+<title>Plot a few principal components — pcaPlot • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -68,44 +68,39 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>jaccard_m</h1>
+    <h1>Plot a few principal components</h1>
     </div>
 
     
-    <p>multiset jaccard for two sets A and B</p>
+    <p>Plot a few principal components against each other, their densities colored by some factor</p>
     
 
-    <pre class="usage"><span class='fu'>jaccard_m</span>(<span class='no'>vec1</span>, <span class='no'>vec2</span>)</pre>
+    <pre class="usage"><span class='fu'>pcaPlot</span>(<span class='no'>model</span>, <span class='kw'>rank</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>color</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vec1</th>
-      <td><p>A vector</p></td>
+      <th>model</th>
+      <td><p>A 'prcomp' model</p></td>
     </tr>
     <tr>
-      <th>vec2</th>
-      <td><p>A vector</p></td>
+      <th>rank</th>
+      <td><p>Number of first principal components to select</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>A factor to color by</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A number</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Let n(a,A) be the number of occurences of element a in multiset A.
-  definition: numerator/denominator where numerator   = sum( min( n(a,A) ,
-  n(a,B) ) for every a in union(A,B)) and denominator = sum( max( n(a,A) ,
-  n(a,B) ) for every a in union(A,B))</p>
+    <p>Plots as a side effect</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set.seed</span>(<span class='fl'>1</span>); <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>letters</span>, <span class='fl'>100</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>set.seed</span>(<span class='fl'>2</span>); <span class='no'>B</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>letters</span>, <span class='fl'>100</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>jaccard_m</span>(<span class='no'>A</span>, <span class='no'>B</span>)</div><div class='output co'>#&gt; [1] 0.5873016</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>pcaPlot</span>(<span class='fu'>prcomp</span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>]), <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)</div><img src='pcaPlot-2.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -113,8 +108,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre"))
 Description: A misc set of functions used often during data analysis.
 Depends: assertthat
-Imports: dplyr, tibble, tools, lsr, stats, data.table
+Imports: dplyr, tibble, tools, lsr, stats, data.table, GGally
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

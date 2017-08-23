@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>jaccard_m — jaccard_m • sidekicks</title>
+<title>Sample n things out if 1:maxValue with replacement — sample_large • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -68,44 +68,58 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>jaccard_m</h1>
+    <h1>Sample n things out if 1:maxValue with replacement</h1>
     </div>
 
     
-    <p>multiset jaccard for two sets A and B</p>
+    <p>Sample from 1:maxValue vector without creating it, using runif</p>
     
 
-    <pre class="usage"><span class='fu'>jaccard_m</span>(<span class='no'>vec1</span>, <span class='no'>vec2</span>)</pre>
+    <pre class="usage"><span class='fu'>sample_large</span>(<span class='no'>n</span>, <span class='no'>maxValue</span>, <span class='no'>seed</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vec1</th>
-      <td><p>A vector</p></td>
+      <th>n</th>
+      <td><p>Number of samples expected</p></td>
     </tr>
     <tr>
-      <th>vec2</th>
-      <td><p>A vector</p></td>
+      <th>maxValue</th>
+      <td><p>Length of the vector to sample from</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>Value of seed</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A number</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Let n(a,A) be the number of occurences of element a in multiset A.
-  definition: numerator/denominator where numerator   = sum( min( n(a,A) ,
-  n(a,B) ) for every a in union(A,B)) and denominator = sum( max( n(a,A) ,
-  n(a,B) ) for every a in union(A,B))</p>
+    <p>An numeric vector, with replacement sample of 1:maxValue</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>set.seed</span>(<span class='fl'>1</span>); <span class='no'>A</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>letters</span>, <span class='fl'>100</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>set.seed</span>(<span class='fl'>2</span>); <span class='no'>B</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>letters</span>, <span class='fl'>100</span>, <span class='fl'>TRUE</span>)
-<span class='fu'>jaccard_m</span>(<span class='no'>A</span>, <span class='no'>B</span>)</div><div class='output co'>#&gt; [1] 0.5873016</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>as.character</span>(<span class='fu'>try</span>(<span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>1e20</span>, <span class='fl'>100</span>), <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; [1] "Error in 1:1e+20 : result would be too long a vector\n"</div><div class='input'><span class='fu'>sample_large</span>(<span class='fl'>100</span>, <span class='fl'>1e20</span>)</div><div class='output co'>#&gt; <span class='message'>Set seed: 201</span></div><div class='output co'>#&gt;   [1] 6.125842e+19 1.668304e+19 3.652178e+19 3.969326e+18 6.276984e+19
+#&gt;   [6] 1.387431e+19 4.488795e+18 3.670186e+19 9.931186e+18 2.876678e+19
+#&gt;  [11] 4.700947e+19 6.778301e+19 6.052413e+19 4.716442e+19 5.223028e+19
+#&gt;  [16] 5.199006e+19 1.061036e+18 2.607292e+19 5.749552e+19 4.867567e+19
+#&gt;  [21] 7.559381e+19 5.982031e+19 5.885472e+19 6.287501e+19 6.548533e+19
+#&gt;  [26] 7.132401e+19 8.445832e+19 5.090983e+19 2.585400e+19 4.346571e+19
+#&gt;  [31] 7.416539e+19 3.847025e+19 5.821289e+19 6.094307e+19 5.256702e+19
+#&gt;  [36] 1.658454e+19 7.483737e+19 1.074977e+19 3.541075e+19 4.684847e+19
+#&gt;  [41] 4.036151e+19 5.373307e+19 1.615143e+19 3.784285e+19 8.928929e+19
+#&gt;  [46] 1.359175e+19 4.621988e+18 3.834514e+19 9.254744e+19 6.346728e+19
+#&gt;  [51] 3.208083e+19 5.414649e+19 7.560527e+19 2.631495e+19 4.650474e+19
+#&gt;  [56] 5.458098e+18 1.697685e+19 6.272532e+19 5.675346e+19 7.228827e+19
+#&gt;  [61] 3.741054e+18 8.540443e+19 4.690189e+19 2.339156e+19 1.062801e+19
+#&gt;  [66] 5.746269e+19 4.567614e+19 2.029647e+19 1.304642e+19 3.105506e+19
+#&gt;  [71] 8.251910e+19 6.588729e+19 7.137192e+19 2.532959e+19 3.577294e+19
+#&gt;  [76] 2.298483e+19 3.847553e+19 6.821188e+19 7.068757e+19 7.669628e+19
+#&gt;  [81] 2.195538e+18 5.326917e+19 1.458170e+18 6.402887e+19 4.761639e+19
+#&gt;  [86] 9.459553e+19 5.336531e+19 9.600944e+19 6.325211e+19 2.689238e+19
+#&gt;  [91] 7.002361e+19 6.069400e+19 6.154242e+19 2.325630e+19 3.739608e+19
+#&gt;  [96] 5.536246e+19 3.591432e+19 8.106726e+18 3.972214e+19 7.384857e+19</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -113,8 +127,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

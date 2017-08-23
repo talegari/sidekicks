@@ -10,4 +10,5 @@
 #' @import assertthat
 #' @importFrom data.table setattr
 #' @importFrom stats sd
+#' @importFrom GGally scatmat
 "_PACKAGE"
