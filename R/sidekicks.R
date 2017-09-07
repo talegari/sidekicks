@@ -2,13 +2,12 @@
 #' @description A misc set of functions used often during data analysis
 #' @importFrom dplyr n_distinct
 #' @importFrom tibble tibble
-#' @importFrom tools list_files_with_exts
-#' @importFrom tools file_path_sans_ext
-#' @importFrom stats quantile
 #' @importFrom utils file_test
 #' @importFrom lsr cramersV
-#' @import assertthat
 #' @importFrom data.table setattr
 #' @importFrom stats sd
 #' @importFrom GGally scatmat
+#' @import assertthat
+#' @import tools
+#' @import stats
 "_PACKAGE"
