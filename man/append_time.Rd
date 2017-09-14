@@ -4,10 +4,12 @@
 \alias{append_time}
 \title{Append timestamp to a filepath}
 \usage{
-append_time(path)
+append_time(path, ext)
 }
 \arguments{
 \item{path}{(string) file path (existence is not checked)}
+
+\item{ext}{(string) Optional extension for the file}
 }
 \value{
 (string) A file path with time stamp appended in the format described
@@ -19,4 +21,5 @@ format:
 }
 \examples{
 append_time("hello/a.b")
+append_time("hello/a.b", "R")
 }
