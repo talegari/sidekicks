@@ -71,7 +71,7 @@ outlierIndex <- function(dataMatrix
       ggplot(tsneOut, aes_string("V1", "V2", color = "outlier")) +
       geom_point() +
       geom_text(data = dplyr::filter_(tsneOut, "outlier")
-                , aes(label = "lab", hjust = 1, vjust = 1)
+                , aes_string(label = "lab", hjust = 1, vjust = 1)
       )
 
     return(list(oulierIndex = outIndex, tsnePlot = tsnePlot))
