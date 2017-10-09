@@ -6,6 +6,7 @@
 #' @param ... extra named arguments passed to `cut`
 #' @return A factor
 #' @details By passing extra arguments to `cut`, output can be styled
+#' @export
 
 cutq = function(vec, n = 10, ...){
   stopifnot(inherits(vec, "numeric") || inherits(vec, "integer"))
