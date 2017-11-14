@@ -82,14 +82,14 @@
     <p>Count the number of NA</p>
     
 
-    <pre class="usage"><span class='fu'>count_na</span>(<span class='no'>vec</span>)</pre>
+    <pre class="usage"><span class='fu'>count_na</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vec</th>
-      <td><p>A vector</p></td>
+      <th>x</th>
+      <td><p>A vector or matrix or array</p></td>
     </tr>
     </table>
     
@@ -99,7 +99,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>count_na</span>(<span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>NA</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>, <span class='fl'>3</span>))</div><div class='output co'>#&gt; [1] 2</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>count_na</span>( <span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>NA</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>, <span class='fl'>3</span>) )</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='fu'>count_na</span>( <span class='fu'>array</span>(<span class='fl'>1</span>:<span class='fl'>64</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='fl'>4</span>)) )</div><div class='output co'>#&gt; [1] 0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
