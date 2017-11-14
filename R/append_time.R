@@ -22,7 +22,6 @@ append_time <- function(path, ext){
   withTime   = paste(withoutExt
                      , gsub(":", "-", gsub(" ", "_", Sys.time())), sep = "__"
                      )
-  withTime   = paste(withTime, gsub("/", "-", Sys.timezone()), sep = "_")
   if (nchar(ext) > 0) {
     withTime = paste(withTime, ext, sep = ".")
   }

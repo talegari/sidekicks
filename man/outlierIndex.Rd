@@ -14,13 +14,13 @@ outlierIndex(dataMatrix, doScale = TRUE, method = "knn", doPlot = TRUE,
 
 \item{method}{Only 'knn' is supported currently}
 
-\item{doPlot}{Whether to compute TSNE and visualiza outliers}
+\item{doPlot}{Whether to compute TSNE and visualize outliers}
 
 \item{coef}{For 'boxplot.stats'}
 
 \item{perplexity}{For 'Rtsne::Rtsne'}
 
-\item{...}{specific inputs based on method (TODO)}
+\item{...}{specific inputs based on method}
 }
 \value{
 A list with: oulierIndex and tsne plot(ggplot2) object
@@ -29,7 +29,11 @@ A list with: oulierIndex and tsne plot(ggplot2) object
 and visualize them with TSNE
 }
 \details{
-TODO
+For method 'knn', provide these two inputs:
+\itemize{
+\item k: Number of neighbors
+\item representative: function to summarize the vector of distances from a point
+}
 }
 \examples{
 result <- outlierIndex(as.matrix(iris[-143,1:4]), k = 3, representative = median)

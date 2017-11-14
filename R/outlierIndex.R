@@ -3,12 +3,16 @@
 #' @param dataMatrix A numeric matrix
 #' @param doScale Whether to scale the data
 #' @param method Only 'knn' is supported currently
-#' @param doPlot Whether to compute TSNE and visualiza outliers
+#' @param doPlot Whether to compute TSNE and visualize outliers
 #' @param coef For 'boxplot.stats'
 #' @param perplexity For 'Rtsne::Rtsne'
-#' @param ... specific inputs based on method (TODO)
+#' @param ... specific inputs based on method
 #' @return A list with: oulierIndex and tsne plot(ggplot2) object
-#' @details TODO
+#' @details For method 'knn', provide these two inputs:
+#' \itemize{
+#' \item k: Number of neighbors
+#' \item representative: function to summarize the vector of distances from a point
+#' }
 #' @examples
 #' result <- outlierIndex(as.matrix(iris[-143,1:4]), k = 3, representative = median)
 #' result[[1]]
