@@ -19,7 +19,8 @@ Imports:
     dbscan (>= 1.1.1),
     magrittr (>= 1.5),
     dplyr (>= 0.7.3),
-    reshape2 (>= 1.4.2)
+    reshape2 (>= 1.4.2),
+    proxy (>= 0.4.20)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

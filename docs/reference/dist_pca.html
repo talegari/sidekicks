@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>vector_to_tibble — vector_to_tibble • sidekicks</title>
+<title>Distance matrix with inter feature(variable) distances based on PCA — dist_pca • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -75,51 +75,47 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>vector_to_tibble</h1>
+    <h1>Distance matrix with inter feature(variable) distances based on PCA</h1>
     </div>
 
     
-    <p>Utility to convert named vector to two column tibble with first column being names of the vector and second being the vector</p>
+    <p>Computes distance between features(variables) weighing the
+  loadings proportional to corresponding eigenvalues</p>
     
 
-    <pre class="usage"><span class='fu'>vector_to_tibble</span>(<span class='no'>vec</span>, <span class='kw'>colname</span> <span class='kw'>=</span> <span class='st'>"col"</span>)</pre>
+    <pre class="usage"><span class='fu'>dist_pca</span>(<span class='no'>model</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vec</th>
-      <td><p>A vector</p></td>
+      <th>model</th>
+      <td><p>Object of class 'prcomp'</p></td>
     </tr>
     <tr>
-      <th>colname</th>
-      <td><p>Name of the column to be formed</p></td>
+      <th>...</th>
+      <td><p>Arguments to be passed to 'proxy::dist'</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A tibble</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The column containing names will be named 'names_colname'</p>
+    <p>See the book: 'An introduction to applied multivariate analysis with R' by Everitt (et al) section 3.6 on 'Rescaling the principal components'</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>vector_to_tibble</span>(<span class='fu'>c</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='kw'>colname</span> <span class='kw'>=</span> <span class='st'>"val"</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 2
-#&gt;   val_names   val
-#&gt;   &lt;chr&gt;     &lt;dbl&gt;
-#&gt; 1 a          1.00
-#&gt; 2 b          2.00</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>pca_iris</span>          <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>(<span class='fu'>scale</span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>]))
+<span class='no'>feature_dist_iris</span> <span class='kw'>&lt;-</span> <span class='fu'>dist_pca</span>(<span class='no'>pca_iris</span>)
+<span class='no'>feature_dist_iris</span></div><div class='output co'>#&gt;              Sepal.Length Sepal.Width Petal.Length
+#&gt; Sepal.Width    2.36441184                         
+#&gt; Petal.Length   0.38799175  2.61263496             
+#&gt; Petal.Width    0.36928628  2.55802891   0.09765659</div><div class='input'><span class='fu'>plot</span>(<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/hclust'>hclust</a></span>(<span class='no'>feature_dist_iris</span>))</div><div class='img'><img src='dist_pca-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
