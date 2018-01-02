@@ -17,7 +17,7 @@ dist_pca <- function(model, ...){
 
   stopifnot(inherits(model, "prcomp"))
 
-  # eigen_i * (1 - cov(pca_j, feature_i))
+  # dissim(feature_i, pca_j) = eigen_i * (1 - cov(pca_j, feature_i))
   dissim <- t(model$sdev^2 * (1 - t(model$rotation)))
 
   feature_dist <- proxy::dist(dissim, ...)

@@ -16,7 +16,8 @@ Computes distance between features(variables) weighing the
   loadings proportional to corresponding eigenvalues
 }
 \details{
-See the book: 'An introduction to applied multivariate analysis with R' by Everitt (et al) section 3.6 on 'Rescaling the principal components'
+See the book: 'An introduction to applied multivariate analysis with
+  R' by Everitt (et al) section 3.6 on 'Rescaling the principal components'
 }
 \examples{
 pca_iris          <- stats::prcomp(scale(iris[,1:4]))
