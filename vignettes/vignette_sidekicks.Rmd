@@ -1,0 +1,20 @@
+---
+title: "Vignette: Sidekicks"
+author: "Srikanth KS (talegari)"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package contains misc functions that are useful during data analysis. They do not conform to a specific topic. They are assorted here so that we know if something might be useful and to avoid a needless rewrite.
+

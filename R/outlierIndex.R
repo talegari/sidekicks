@@ -35,7 +35,9 @@ outlierIndex <- function(dataMatrix
   assert_that(is.number(coef) && coef > 0)
   assert_that(is.count(perplexity))
 
-  dataMatrix <- if(doScale) scale(dataMatrix)
+  if(doScale){
+    dataMatrix <- scale(dataMatrix)
+  }
   options    <- list(...)
 
   # start: knn
