@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,11 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Distance matrix with inter feature(variable) distances based on PCA — dist_pca" />
+
+<meta property="og:description" content="Computes distance between features(variables) weighing the
+  loadings proportional to corresponding eigenvalues" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -110,7 +117,7 @@
 <span class='no'>feature_dist_iris</span></div><div class='output co'>#&gt;              Sepal.Length Sepal.Width Petal.Length
 #&gt; Sepal.Width    2.36441184                         
 #&gt; Petal.Length   0.38799175  2.61263496             
-#&gt; Petal.Width    0.36928628  2.55802891   0.09765659</div><div class='input'><span class='fu'>plot</span>(<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/hclust'>hclust</a></span>(<span class='no'>feature_dist_iris</span>))</div><div class='img'><img src='dist_pca-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+#&gt; Petal.Width    0.36928628  2.55802891   0.09765659</div><div class='input'><span class='fu'>plot</span>(<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/hclust'>hclust</a></span>(<span class='no'>feature_dist_iris</span>))</div><div class='img'><img src='dist_pca-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -131,7 +138,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
