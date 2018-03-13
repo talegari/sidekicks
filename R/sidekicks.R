@@ -19,4 +19,5 @@
 #' @import tools
 #' @import stats
 #' @import ggplot2
+#' @importFrom data.table :=
 "_PACKAGE"
