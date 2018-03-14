@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert the output of MASS::kde2d output into long format. — kde2d_tidy • sidekicks</title>
+<title>Split a long delimted string into individual strings. — toString_to_character • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Convert the output of MASS::kde2d output into long format. — kde2d_tidy" />
+<meta property="og:title" content="Split a long delimted string into individual strings. — toString_to_character" />
 
-<meta property="og:description" content="Long format is helpful in ggplot2 plots." />
+<meta property="og:description" content="Usually helpful in setting extracted levels." />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -81,52 +81,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert the output of MASS::kde2d output into long format.</h1>
+    <h1>Split a long delimted string into individual strings.</h1>
     </div>
 
     
-    <p>Long format is helpful in ggplot2 plots.</p>
+    <p>Usually helpful in setting extracted levels.</p>
     
 
-    <pre class="usage"><span class='fu'>kde2d_tidy</span>(<span class='no'>kde2d_output</span>)</pre>
+    <pre class="usage"><span class='fu'>toString_to_character</span>(<span class='no'>string</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>","</span>, <span class='kw'>stripWhitespace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>kde2d_output</th>
-      <td><p>Ouput of MASS:kde2d output.</p></td>
+      <th>string</th>
+      <td><p>Long string with delimters, may be output of 'toString'.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>delimiter. Default is ",".</p></td>
+    </tr>
+    <tr>
+      <th>stripWhitespace</th>
+      <td><p>Whether to trim whitespace on both sides of resulting strings.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A string.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"MASS"</span>)
-<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>MASS</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/MASS/topics/kde2d'>kde2d</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>100</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)
-                    , <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>100</span>, <span class='fl'>0</span>, <span class='fl'>5</span>)
-                    , <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>
-                    )
-<span class='fu'>str</span>(<span class='no'>temp</span>)</div><div class='output co'>#&gt; List of 3
-#&gt;  $ x: num [1:500] 0.0136 0.0156 0.0175 0.0194 0.0214 ...
-#&gt;  $ y: num [1:500] 0.063 0.0728 0.0826 0.0924 0.1022 ...
-#&gt;  $ z: num [1:500, 1:500] 0.0915 0.0926 0.0936 0.0946 0.0957 ...</div><div class='input'><span class='fu'>kde2d_tidy</span>(<span class='no'>temp</span>)</div><div class='output co'>#&gt;                  x          y          z
-#&gt;      1: 0.01362493 0.06303505 0.09151393
-#&gt;      2: 0.01556276 0.06303505 0.09255965
-#&gt;      3: 0.01750058 0.06303505 0.09360108
-#&gt;      4: 0.01943841 0.06303505 0.09463786
-#&gt;      5: 0.02137623 0.06303505 0.09566961
-#&gt;     ---                                 
-#&gt; 249996: 0.97284868 4.95311226 0.06013776
-#&gt; 249997: 0.97478650 4.95311226 0.05937021
-#&gt; 249998: 0.97672433 4.95311226 0.05860426
-#&gt; 249999: 0.97866216 4.95311226 0.05784009
-#&gt; 250000: 0.98059998 4.95311226 0.05707791</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>concat</span> <span class='kw'>&lt;-</span> <span class='fu'>toString</span>(<span class='fu'>colnames</span>(<span class='no'>iris</span>))
+<span class='fu'>print</span>(<span class='no'>concat</span>)</div><div class='output co'>#&gt; [1] "Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, Species"</div><div class='input'><span class='fu'>toString_to_character</span>(<span class='no'>concat</span>)</div><div class='output co'>#&gt;   Sepal.Length    Sepal.Width   Petal.Length    Petal.Width        Species 
+#&gt; "Sepal.Length"  "Sepal.Width" "Petal.Length"  "Petal.Width"      "Species" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
