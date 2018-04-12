@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Append timestamp to a filepath — append_time • sidekicks</title>
+<title>Obtain frequencies of an atomic vector as proportions. — freq • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,10 +27,9 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Append timestamp to a filepath — append_time" />
+<meta property="og:title" content="Obtain frequencies of an atomic vector as proportions. — freq" />
 
-<meta property="og:description" content="format:
-  filename__year-month-day_hour-minutes-seconds_timezone.extension" />
+<meta property="og:description" content="NA as considered valid and their proportions are calculated." />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -82,37 +81,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Append timestamp to a filepath</h1>
+    <h1>Obtain frequencies of an atomic vector as proportions.</h1>
     </div>
 
     
-    <p>format:
-  filename__year-month-day_hour-minutes-seconds_timezone.extension</p>
+    <p>NA as considered valid and their proportions are calculated.</p>
     
 
-    <pre class="usage"><span class='fu'>append_time</span>(<span class='no'>path</span>, <span class='no'>ext</span>)</pre>
+    <pre class="usage"><span class='fu'>freq</span>(<span class='no'>vec</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>(string) file path (existence is not checked)</p></td>
-    </tr>
-    <tr>
-      <th>ext</th>
-      <td><p>(string) Optional extension for the file</p></td>
+      <th>vec</th>
+      <td><p>An atomic vector</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>(string) A file path with time stamp appended in the format described
-  in the description</p>
+    <p>A vector of frequencies as proportions with same length as the
+  vector.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>append_time</span>(<span class='st'>"hello/a.b"</span>)</div><div class='output co'>#&gt; [1] "hello/a__2018-04-12_10-21-40.b"</div><div class='input'><span class='fu'>append_time</span>(<span class='st'>"hello/a.b"</span>, <span class='st'>"R"</span>)</div><div class='output co'>#&gt; [1] "hello/a__2018-04-12_10-21-40.R"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>freq</span>(<span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>1</span>,<span class='fl'>NA</span>))</div><div class='output co'>#&gt; [1] 0.3333333 0.5000000 0.5000000 0.5000000 0.3333333 0.1666667</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

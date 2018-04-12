@@ -2,7 +2,7 @@
 % Please edit documentation in R/counts.R
 \name{counts}
 \alias{counts}
-\title{counts}
+\title{Obtain counts of an atomic vector as a named integer vector.}
 \usage{
 counts(vec)
 }
@@ -13,7 +13,7 @@ counts(vec)
 A named integer vector
 }
 \description{
-Obtain counts of an atomic vector as a named integer vector
+NA as considered valid and their counts are calculated.
 }
 \examples{
 counts(c(1,2,2,2,1,NA))

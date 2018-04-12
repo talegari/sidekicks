@@ -1,11 +1,10 @@
-#' @title Find the outlier rows in numeric matrix
+#' @title Find the outlier rows in a distance matrix
 #' @description and visualize them with TSNE
-#' @param dataMatrix A numeric matrix
-#' @param doScale Whether to scale the data
+#' @param distObject A disttance object.
 #' @param method Only 'knn' is supported currently
 #' @param doPlot Whether to compute TSNE and visualize outliers
 #' @param coef For 'boxplot.stats'
-#' @param perplexity For 'Rtsne::Rtsne'
+#' @param perplexity param for Rtsne::Rtsne.
 #' @param ... specific inputs based on method
 #' @return A list with: oulierIndex and tsne plot(ggplot2) object
 #' @details For method 'knn', provide these two inputs:
@@ -14,30 +13,23 @@
 #' \item representative: function to summarize the vector of distances from a point
 #' }
 #' @examples
-#' result <- outlierIndex(as.matrix(iris[-143,1:4]), k = 3, representative = median)
+#' result <- outlierIndex(dist(iris[,1:4]), k = 3, representative = median)
 #' result[[1]]
 #' result[[2]]
 #' @export
 
-outlierIndex <- function(dataMatrix
-                         , doScale    = TRUE
+outlierIndex <- function(distObject
                          , method     = "knn"
                          , doPlot     = TRUE
                          , coef       = 1.5
-                         , perplexity = 30
+                         , perplexity = 30L
                          , ...){
 
-  assert_that(is.matrix(dataMatrix))
-  assert_that(!anyDuplicated(dataMatrix))
-  assert_that(typeof(dataMatrix) %in% c("integer", "double"))
-  assert_that(is.logical(doScale))
+  assert_that(inherits(distObject, "dist"))
   assert_that(method %in% c("knn"))
   assert_that(is.number(coef) && coef > 0)
-  assert_that(is.count(perplexity))
+  assert_that(is.count(perplexity) && dplyr::between(perplexity, 1, 50))
 
-  if(doScale){
-    dataMatrix <- scale(dataMatrix)
-  }
   options    <- list(...)
 
   # start: knn
@@ -53,7 +45,7 @@ outlierIndex <- function(dataMatrix
     assert_that(is.function(options[["representative"]]))
 
     set.seed(1)
-    distances <- dbscan::kNNdist(x = dataMatrix, k = options[["k"]])
+    distances <- dbscan::kNNdist(x = distObject, k = options[["k"]])
     repValues <- apply(distances, 1, options[["representative"]])
   }
   # end: knn
@@ -69,9 +61,15 @@ outlierIndex <- function(dataMatrix
   if(doPlot && length(outIndex) > 0){
 
     set.seed(1)
-    tsneOut <- Rtsne::Rtsne(dataMatrix, perplexity = perplexity)$Y %>%
+    tsneOut <- Rtsne::Rtsne(distObject
+                            , is_distance = TRUE
+                            , perplexity  = perplexity
+                            )[["Y"]]%>%
       tibble::as_tibble() %>%
-      dplyr::bind_cols(outlier = outBool, lab = as.character(1:nrow(dataMatrix)))
+      dplyr::bind_cols(tibble::tibble(outlier = outBool
+                              , lab = as.character(1:attr(distObject, "Size"))
+                              )
+                       )
 
     tsnePlot <-
       ggplot(tsneOut, aes_string("V1", "V2", color = "outlier")) +

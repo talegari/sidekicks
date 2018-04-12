@@ -2,15 +2,13 @@
 % Please edit documentation in R/outlierIndex.R
 \name{outlierIndex}
 \alias{outlierIndex}
-\title{Find the outlier rows in numeric matrix}
+\title{Find the outlier rows in a distance matrix}
 \usage{
-outlierIndex(dataMatrix, doScale = TRUE, method = "knn", doPlot = TRUE,
-  coef = 1.5, perplexity = 30, ...)
+outlierIndex(distObject, method = "knn", doPlot = TRUE, coef = 1.5,
+  perplexity = 30L, ...)
 }
 \arguments{
-\item{dataMatrix}{A numeric matrix}
-
-\item{doScale}{Whether to scale the data}
+\item{distObject}{A disttance object.}
 
 \item{method}{Only 'knn' is supported currently}
 
@@ -18,7 +16,7 @@ outlierIndex(dataMatrix, doScale = TRUE, method = "knn", doPlot = TRUE,
 
 \item{coef}{For 'boxplot.stats'}
 
-\item{perplexity}{For 'Rtsne::Rtsne'}
+\item{perplexity}{param for Rtsne::Rtsne.}
 
 \item{...}{specific inputs based on method}
 }
@@ -36,7 +34,7 @@ For method 'knn', provide these two inputs:
 }
 }
 \examples{
-result <- outlierIndex(as.matrix(iris[-143,1:4]), k = 3, representative = median)
+result <- outlierIndex(dist(iris[,1:4]), k = 3, representative = median)
 result[[1]]
 result[[2]]
 }
