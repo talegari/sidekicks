@@ -1,6 +1,6 @@
 Package: sidekicks
 Title: A Misc Set of Functions for Data Analysis
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre"))
 Description: A misc set of functions used often during data analysis.
 Depends:

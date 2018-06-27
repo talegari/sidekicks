@@ -3,24 +3,23 @@
 #'   The dataframe is allowed to have columns of these four classes: integer,
 #'   numeric, factor and character. The character column is considered as
 #'   categorical variable.
-#' @details The correlation is computed as follows: \itemize{
-#'   \item integer/numeric pair: pearson correlation using `cor` function. The
+#' @details The correlation is computed as follows: \itemize{ \item
+#'   integer/numeric pair: pearson correlation using `cor` function. The
 #'   valuelies between -1 and 1.
 #'
-#'   \item integer/numeric - factor/categorical pair: correlation coefficient or
-#'   squared root of R^2 coefficient of linear regression of integer/numeric
-#'   variable over factor/categorical variable using `lm` function. The value
-#'   lies between 0 and 1. \item factor/categorical pair: cramersV value is
-#'   computed based on chisq test using `lsr::cramersV` function. The value lies
-#'   between 0 and 1.
-#'   }
-#'   For a comprehensive implementation, use `polycor::hetcor`
+#'   \item integer/numeric - factor/categorical pair: Anova is performed  and
+#'   effect size is computed . The value lies between 0 and 1. \item
+#'   factor/categorical pair: cramersV value is computed based on chisq test
+#'   using `lsr::cramersV` function. The value lies between 0 and 1. } For a
+#'   comprehensive implementation, use `polycor::hetcor`
 #' @param df input data frame
+#' @param nproc Number of parallel processes to use (unix systems only)
+#' @return  A simil/dist object.
 #' @examples
-#' iris_cor <- cor2(iris)
+#' iris_cor <- cor2(iris, nproc = 1)
 #' @export
 
-cor2 = function(df){
+cor2 = function(df, nproc = parallel::detectCores()){
 
   stopifnot(inherits(df, "data.frame"))
   stopifnot(sapply(df, class) %in% c("integer"
@@ -30,49 +29,67 @@ cor2 = function(df){
 
   cor_fun <- function(pos_1, pos_2){
 
+    van <- df[[pos_1]]
+    tu  <- df[[pos_2]]
+
     # both are numeric
-    if(class(df[[pos_1]]) %in% c("integer", "numeric") &&
-       class(df[[pos_2]]) %in% c("integer", "numeric")){
-      r <- stats::cor(df[[pos_1]]
-                      , df[[pos_2]]
+    if(class(van) %in% c("integer", "numeric") &&
+       class(tu) %in% c("integer", "numeric")){
+      r <- stats::cor(van
+                      , tu
                       , use = "pairwise.complete.obs"
-      )
+                      )
     }
 
     # one is numeric and other is a factor/character
-    if(class(df[[pos_1]]) %in% c("integer", "numeric") &&
-       class(df[[pos_2]]) %in% c("factor", "character")){
-      r <- sqrt(
-        summary(
-          stats::lm(df[[pos_1]] ~ as.factor(df[[pos_2]])))[["r.squared"]])
+    if(class(van) %in% c("integer", "numeric") &&
+       class(tu) %in% c("factor", "character")){
+      r <- stats::aov( van ~ as.factor(tu) ) %>%
+        lsr::etaSquared() %>%
+        `[`(1) %>%
+        sqrt()
     }
 
-    if(class(df[[pos_2]]) %in% c("integer", "numeric") &&
-       class(df[[pos_1]]) %in% c("factor", "character")){
-      r <- sqrt(
-        summary(
-          stats::lm(df[[pos_2]] ~ as.factor(df[[pos_1]])))[["r.squared"]])
+    if(class(tu) %in% c("integer", "numeric") &&
+       class(van) %in% c("factor", "character")){
+      r <- stats::aov( tu ~ as.factor(van) ) %>%
+        lsr::etaSquared() %>%
+        `[`(1) %>%
+        sqrt()
     }
 
     # both are factor/character
-    if(class(df[[pos_1]]) %in% c("factor", "character") &&
-       class(df[[pos_2]]) %in% c("factor", "character")){
-      r <- lsr::cramersV(df[[pos_1]], df[[pos_2]], simulate.p.value = TRUE)
+    if(class(van) %in% c("factor", "character") &&
+       class(tu) %in% c("factor", "character")){
+      r <- lsr::cramersV(van, tu, simulate.p.value = TRUE)
     }
 
     return(r)
   }
 
-  cor_fun <- Vectorize(cor_fun)
-
   # now compute corr matrix
-  corrmat <- outer(1:ncol(df)
-                   , 1:ncol(df)
-                   , function(x, y) cor_fun(x, y)
-  )
+  Var1 <- NULL
+  Var2 <- NULL
 
-  rownames(corrmat) <- colnames(df)
-  colnames(corrmat) <- colnames(df)
+  grid <- expand.grid(1:ncol(df), 1:ncol(df)) %>%
+    dplyr::filter(Var1 > Var2) %>%
+    as.matrix()
 
-  return(corrmat)
+  if(.Platform$OS.type == "unix"){
+    vec <- parallel::mclapply(1:nrow(grid)
+                              , function(x) cor_fun(grid[x, 1], grid[x,2])
+                              , mc.cores = nproc
+                              ) %>%
+      unlist()
+  } else {
+    vec <- vapply(1:nrow(grid)
+                  , function(x) cor_fun(grid[x, 1], grid[x,2])
+                  , numeric(1)
+                  )
+  }
+
+  class(vec)        <- c("dist", "simil")
+  attr(vec, "Size") <- ncol(df)
+
+  return(vec)
 }
