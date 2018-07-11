@@ -3,29 +3,38 @@
 #'   The dataframe is allowed to have columns of these four classes: integer,
 #'   numeric, factor and character. The character column is considered as
 #'   categorical variable.
-#' @details The correlation is computed as follows: \itemize{ \item
-#'   integer/numeric pair: pearson correlation using `cor` function. The
+#' @details The correlation is computed as follows:
+#'
+#'   \itemize{
+#'
+#'   \item integer/numeric pair: pearson correlation using `cor` function. The
 #'   valuelies between -1 and 1.
 #'
 #'   \item integer/numeric - factor/categorical pair: Anova is performed  and
 #'   effect size is computed . The value lies between 0 and 1. \item
 #'   factor/categorical pair: cramersV value is computed based on chisq test
-#'   using `lsr::cramersV` function. The value lies between 0 and 1. } For a
-#'   comprehensive implementation, use `polycor::hetcor`
+#'   using `lsr::cramersV` function. The value lies between 0 and 1.
+#'
+#'   }
+#'
+#'   For a comprehensive implementation, use `polycor::hetcor`
 #' @param df input data frame
-#' @param nproc Number of parallel processes to use (unix systems only)
+#' @param nproc Number of parallel processes to use
 #' @return  A simil/dist object.
 #' @examples
 #' iris_cor <- cor2(iris, nproc = 1)
 #' @export
 
-cor2 = function(df, nproc = parallel::detectCores()){
+cor2 = function(df, nproc = future::availableCores()){
 
   stopifnot(inherits(df, "data.frame"))
   stopifnot(sapply(df, class) %in% c("integer"
                                      , "numeric"
                                      , "factor"
-                                     , "character"))
+                                     , "character")
+            )
+  assertthat::assert_that(assertthat::is.count(nproc))
+  nproc <- min(nproc, future::availableCores()) %>% max(1L)
 
   cor_fun <- function(pos_1, pos_2){
 
@@ -75,19 +84,12 @@ cor2 = function(df, nproc = parallel::detectCores()){
     dplyr::filter(Var1 > Var2) %>%
     as.matrix()
 
-  if(.Platform$OS.type == "unix"){
-    vec <- parallel::mclapply(1:nrow(grid)
-                              , function(x) cor_fun(grid[x, 1], grid[x,2])
-                              , mc.cores = nproc
-                              ) %>%
-      unlist()
-  } else {
-    vec <- vapply(1:nrow(grid)
-                  , function(x) cor_fun(grid[x, 1], grid[x,2])
-                  , numeric(1)
-                  )
-  }
-
+  # parallel process using futures
+  future::plan("future::multiprocess", workers = nproc)
+  vec <- future.apply::future_vapply(1:nrow(grid)
+                                     , function(x) cor_fun(grid[x, 1], grid[x,2])
+                                     , numeric(1)
+                                     )
   class(vec)        <- c("dist", "simil")
   attr(vec, "Size") <- ncol(df)
 

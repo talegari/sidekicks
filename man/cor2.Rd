@@ -4,12 +4,12 @@
 \alias{cor2}
 \title{cor2: Compute correlations of columns of a dataframe of mixed types}
 \usage{
-cor2(df, nproc = parallel::detectCores())
+cor2(df, nproc = future::availableCores())
 }
 \arguments{
 \item{df}{input data frame}
 
-\item{nproc}{Number of parallel processes to use (unix systems only)}
+\item{nproc}{Number of parallel processes to use}
 }
 \value{
 A simil/dist object.
@@ -21,15 +21,21 @@ Compute correlations of columns of a dataframe of mixed types.
   categorical variable.
 }
 \details{
-The correlation is computed as follows: \itemize{ \item
-  integer/numeric pair: pearson correlation using `cor` function. The
+The correlation is computed as follows:
+
+  \itemize{
+
+  \item integer/numeric pair: pearson correlation using `cor` function. The
   valuelies between -1 and 1.
 
   \item integer/numeric - factor/categorical pair: Anova is performed  and
   effect size is computed . The value lies between 0 and 1. \item
   factor/categorical pair: cramersV value is computed based on chisq test
-  using `lsr::cramersV` function. The value lies between 0 and 1. } For a
-  comprehensive implementation, use `polycor::hetcor`
+  using `lsr::cramersV` function. The value lies between 0 and 1.
+
+  }
+
+  For a comprehensive implementation, use `polycor::hetcor`
 }
 \examples{
 iris_cor <- cor2(iris, nproc = 1)

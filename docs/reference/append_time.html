@@ -21,17 +21,23 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Append timestamp to a filepath — append_time" />
 
 <meta property="og:description" content="format:
   filename__year-month-day_hour-minutes-seconds_timezone.extension" />
 <meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -54,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">sidekicks</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">sidekicks</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.9</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -72,6 +82,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -79,20 +90,24 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Append timestamp to a filepath</h1>
+    
+    <div class="hidden name"><code>append_time.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>format:
   filename__year-month-day_hour-minutes-seconds_timezone.extension</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>append_time</span>(<span class='no'>path</span>, <span class='no'>ext</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -112,7 +127,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>append_time</span>(<span class='st'>"hello/a.b"</span>)</div><div class='output co'>#&gt; [1] "hello/a__2018-07-02_11-35-15.b"</div><div class='input'><span class='fu'>append_time</span>(<span class='st'>"hello/a.b"</span>, <span class='st'>"R"</span>)</div><div class='output co'>#&gt; [1] "hello/a__2018-07-02_11-35-15.R"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>append_time</span>(<span class='st'>"hello/a.b"</span>)</div><div class='output co'>#&gt; [1] "hello/a__2018-07-11_17-36-47.b"</div><div class='input'><span class='fu'>append_time</span>(<span class='st'>"hello/a.b"</span>, <span class='st'>"R"</span>)</div><div class='output co'>#&gt; [1] "hello/a__2018-07-11_17-36-47.R"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -139,5 +154,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
