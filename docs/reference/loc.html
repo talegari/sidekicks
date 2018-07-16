@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>percent_change — percent_change • sidekicks</title>
+<title>classwise local outliers — loc • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,12 @@
 
 
 
-<meta property="og:title" content="percent_change — percent_change" />
+<meta property="og:title" content="classwise local outliers — loc" />
 
-<meta property="og:description" content="percentage change of a vector from something, typically the
-  first element" />
+<meta property="og:description" content="Detect local outliers when an observation of class A occurs in
+  the neighborhood of class B using fixed radius neighborhood search. When
+  the fraction of neighbors of the same class as the observation is less than
+  the threshold, it is considered as an outlier." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -93,40 +95,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>percent_change</h1>
+    <h1>classwise local outliers</h1>
     
-    <div class="hidden name"><code>percent_change.Rd</code></div>
+    <div class="hidden name"><code>loc.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>percentage change of a vector from something, typically the
-  first element</p>
+    <p>Detect local outliers when an observation of class A occurs in
+  the neighborhood of class B using fixed radius neighborhood search. When
+  the fraction of neighbors of the same class as the observation is less than
+  the threshold, it is considered as an outlier.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>percent_change</span>(<span class='no'>vec</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='no'>vec</span>[<span class='fl'>1</span>])</pre>
+    <pre class="usage"><span class='fu'>loc</span>(<span class='no'>d</span>, <span class='no'>classes</span>, <span class='no'>r</span>, <span class='kw'>thres</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>minn</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>minnStrategy</span> <span class='kw'>=</span> <span class='st'>"include"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vec</th>
-      <td><p>An integer or numeric vector</p></td>
+      <th>d</th>
+      <td><p>object of class 'dist'</p></td>
     </tr>
     <tr>
-      <th>from</th>
-      <td><p>An integer or a number</p></td>
+      <th>classes</th>
+      <td><p>(factor) Vector of classes</p></td>
+    </tr>
+    <tr>
+      <th>r</th>
+      <td><p>Value of the fixed radius</p></td>
+    </tr>
+    <tr>
+      <th>thres</th>
+      <td><p>Threshold for the fraction of observations of same class</p></td>
+    </tr>
+    <tr>
+      <th>minn</th>
+      <td><p>Minimum number of neighbors in the neighborhood</p></td>
+    </tr>
+    <tr>
+      <th>minnStrategy</th>
+      <td><p>When minnStrategy is 'include', the points with less than
+minn neighbors are considered outliers.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A integer or numeric vector indicating percentage change</p>
+    <p>Vector of indexes of outliers</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Ideal conditions for using this is when there is no data imbalance
+  and there are observations similar to eachother but from different classes.
+  When minnStrategy is 'include', the global outliers (ones with less than
+  minn neighbors) are included in the output.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>percent_change</span>(<span class='fu'>c</span>(<span class='fl'>2</span>,<span class='fl'>1</span>,<span class='fl'>3</span>), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 100   0 200</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -134,9 +160,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>
