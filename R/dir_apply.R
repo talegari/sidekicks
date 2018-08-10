@@ -7,6 +7,7 @@
 #' @param extensions (character vector) extension names. Defaults to "csv"
 #' @param ... additional arguments to fun, passed asis and unevaluated
 #' @return A list with names same as the filenames in the directory
+#' @export
 
 dir_apply = function(directory
                       , fun         = "read.csv"
