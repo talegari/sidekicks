@@ -23,10 +23,11 @@
 #' @return  A simil/dist object.
 #' @examples
 #' iris_cor <- cor2(iris, nproc = 1)
+#' iris_cor <- cor2(iris)
 #' @export
 
 cor2 = function(df
-                , nproc = future::availableCores()
+                , nproc = parallel::detectCores()
                 ){
 
   stopifnot(inherits(df, "data.frame"))
@@ -36,7 +37,7 @@ cor2 = function(df
                                      , "character")
             )
   assertthat::assert_that(assertthat::is.count(nproc))
-  nproc <- min(nproc, future::availableCores()) %>% max(1L)
+  nproc <- min(nproc, parallel::detectCores())
 
   cor_fun <- function(pos_1, pos_2){
 
@@ -93,11 +94,10 @@ cor2 = function(df
     as.matrix()
 
   # parallel process using futures
-  future::plan("future::multiprocess", workers = nproc)
-  vec <- future.apply::future_vapply(1:nrow(grid)
-                                     , function(x) cor_fun(grid[x, 1], grid[x,2])
-                                     , numeric(1)
-                                     )
+  vec <- pbapply::pbsapply(1:nrow(grid)
+                           , function(x) cor_fun(grid[x, 1], grid[x,2])
+                           , cl = nproc
+                           )
   class(vec)         <- c("dist", "simil")
   attr(vec, "Size")  <- ncol(df)
   attr(vec, "diag")  <- FALSE

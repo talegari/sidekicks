@@ -94,7 +94,7 @@
   categorical variable.</p>
     
 
-    <pre class="usage"><span class='fu'>cor2</span>(<span class='no'>df</span>, <span class='kw'>nproc</span> <span class='kw'>=</span> <span class='kw pkg'>future</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/future/topics/availableCores'>availableCores</a></span>())</pre>
+    <pre class="usage"><span class='fu'>cor2</span>(<span class='no'>df</span>, <span class='kw'>nproc</span> <span class='kw'>=</span> <span class='kw pkg'>parallel</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/parallel/topics/detectCores'>detectCores</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -123,12 +123,12 @@
   effect size is computed . The value lies between 0 and 1.</p></li>
 <li><p>factor/categorical pair: cramersV value is computed based on chisq test
   using `lsr::cramersV` function. The value lies between 0 and 1.</p></li>
-</ul>
-    <p>For a comprehensive implementation, use `polycor::hetcor`</p>
+</ul><p>Pairwise complete observations are used to compute correlation.
+For a comprehensive implementation, use `polycor::hetcor`</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>iris_cor</span> <span class='kw'>&lt;-</span> <span class='fu'>cor2</span>(<span class='no'>iris</span>, <span class='kw'>nproc</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>iris_cor</span> <span class='kw'>&lt;-</span> <span class='fu'>cor2</span>(<span class='no'>iris</span>, <span class='kw'>nproc</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt;    |                                                  | 0 % ~calculating     |+++++                                             | 10% ~00s             |++++++++++                                        | 20% ~00s             |+++++++++++++++                                   | 30% ~00s             |++++++++++++++++++++                              | 40% ~00s             |+++++++++++++++++++++++++                         | 50% ~00s             |++++++++++++++++++++++++++++++                    | 60% ~00s             |+++++++++++++++++++++++++++++++++++               | 70% ~00s             |++++++++++++++++++++++++++++++++++++++++         | 80% ~00s             |+++++++++++++++++++++++++++++++++++++++++++++    | 90% ~00s             |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed = 00s</div><div class='input'><span class='no'>iris_cor</span> <span class='kw'>&lt;-</span> <span class='fu'>cor2</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt;    |                                                  | 0 % ~calculating     |+++++++++++++++++++++++++                         | 50% ~00s             |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed = 00s</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

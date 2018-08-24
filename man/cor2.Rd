@@ -4,7 +4,7 @@
 \alias{cor2}
 \title{cor2: Compute correlations of columns of a dataframe of mixed types}
 \usage{
-cor2(df, nproc = future::availableCores())
+cor2(df, nproc = parallel::detectCores())
 }
 \arguments{
 \item{df}{input data frame}
@@ -39,4 +39,5 @@ For a comprehensive implementation, use `polycor::hetcor`
 }
 \examples{
 iris_cor <- cor2(iris, nproc = 1)
+iris_cor <- cor2(iris)
 }
