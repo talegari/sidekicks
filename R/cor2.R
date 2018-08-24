@@ -16,8 +16,8 @@
 #'   using `lsr::cramersV` function. The value lies between 0 and 1.
 #'
 #'   }
-#'
-#'   For a comprehensive implementation, use `polycor::hetcor`
+#' Pairwise complete observations are used to compute correlation.
+#' For a comprehensive implementation, use `polycor::hetcor`
 #' @param df input data frame
 #' @param nproc Number of parallel processes to use
 #' @return  A simil/dist object.
@@ -25,7 +25,9 @@
 #' iris_cor <- cor2(iris, nproc = 1)
 #' @export
 
-cor2 = function(df, nproc = future::availableCores()){
+cor2 = function(df
+                , nproc = future::availableCores()
+                ){
 
   stopifnot(inherits(df, "data.frame"))
   stopifnot(sapply(df, class) %in% c("integer"
@@ -40,6 +42,12 @@ cor2 = function(df, nproc = future::availableCores()){
 
     van <- df[[pos_1]]
     tu  <- df[[pos_2]]
+
+    van_cc <- complete.cases(van)
+    tu_cc  <- complete.cases(tu)
+
+    van <- van[van_cc & tu_cc]
+    tu  <- tu[van_cc & tu_cc]
 
     # both are numeric
     if(class(van) %in% c("integer", "numeric") &&
@@ -90,8 +98,10 @@ cor2 = function(df, nproc = future::availableCores()){
                                      , function(x) cor_fun(grid[x, 1], grid[x,2])
                                      , numeric(1)
                                      )
-  class(vec)        <- c("dist", "simil")
-  attr(vec, "Size") <- ncol(df)
+  class(vec)         <- c("dist", "simil")
+  attr(vec, "Size")  <- ncol(df)
+  attr(vec, "diag")  <- FALSE
+  attr(vec, "upper") <- FALSE
 
   return(vec)
 }

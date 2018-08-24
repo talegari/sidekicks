@@ -34,8 +34,8 @@ The correlation is computed as follows:
   using `lsr::cramersV` function. The value lies between 0 and 1.
 
   }
-
-  For a comprehensive implementation, use `polycor::hetcor`
+Pairwise complete observations are used to compute correlation.
+For a comprehensive implementation, use `polycor::hetcor`
 }
 \examples{
 iris_cor <- cor2(iris, nproc = 1)
