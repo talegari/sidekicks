@@ -21,13 +21,19 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Function reference" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">sidekicks</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">sidekicks</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.14</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -68,6 +78,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -75,293 +86,295 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.1.13</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="append_time.html">append_time</a></code> </p>
-          </td>
-          <td><p>Append timestamp to a filepath</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="averageProximity.html">averageProximity</a></code> </p>
-          </td>
-          <td><p>Compute average proximity matrix on a dataset using randomForest</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="condense.html">condense</a></code> </p>
-          </td>
-          <td><p>Sample points based on distance matrix</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cor2.html">cor2</a></code> </p>
-          </td>
-          <td><p>cor2: Compute correlations of columns of a dataframe of mixed types</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="count_na.html">count_na</a></code> </p>
-          </td>
-          <td><p>count_na</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="count_pattern.html">count_pattern</a></code> </p>
-          </td>
-          <td><p>count_pattern</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="counts.html">counts</a></code> </p>
-          </td>
-          <td><p>Obtain counts of an atomic vector as a named integer vector.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cutq.html">cutq</a></code> </p>
-          </td>
-          <td><p>cutq</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="decodeCharColumns.html">decodeCharColumns</a></code> </p>
-          </td>
-          <td><p>Decode character columns.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dir_apply.html">dir_apply</a></code> </p>
-          </td>
-          <td><p>dir_apply: lapply kind of behaviour on files of a directory</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_pca.html">dist_pca</a></code> </p>
-          </td>
-          <td><p>Distance matrix with inter feature(variable) distances based on PCA</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="downsample_majority.html">downsample_majority</a></code> </p>
-          </td>
-          <td><p>Downsample majority class to the size of minority class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dr_measure.html">dr_measure</a></code> </p>
-          </td>
-          <td><p>A measure of kNN of original and dimension reduced data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="encodeCharColumns.html">encodeCharColumns</a></code> </p>
-          </td>
-          <td><p>Encode character columns.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="freq.html">freq</a></code> </p>
-          </td>
-          <td><p>Obtain frequencies of an atomic vector as proportions.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="image2.html">image2</a></code> </p>
-          </td>
-          <td><p>ggplot2 based alternative for R's 'image'</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="int_approx.html">int_approx</a></code> </p>
-          </td>
-          <td><p>int_approx</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="is_vector.html">is_vector</a></code> </p>
-          </td>
-          <td><p>is_vector</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="jaccard_m.html">jaccard_m</a></code> </p>
-          </td>
-          <td><p>jaccard_m</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="kde2d_tidy.html">kde2d_tidy</a></code> </p>
-          </td>
-          <td><p>Convert the output of MASS::kde2d output into long format.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="loc.html">loc</a></code> </p>
-          </td>
-          <td><p>classwise local outliers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mem_cur.html">mem_cur</a></code> </p>
-          </td>
-          <td><p>current memory usage</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mem_max.html">mem_max</a></code> </p>
-          </td>
-          <td><p>maximum memory usage</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="pcaPlot.html">pcaPlot</a></code> </p>
-          </td>
-          <td><p>Plot a few principal components</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="percent_change.html">percent_change</a></code> </p>
-          </td>
-          <td><p>percent_change</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict.regressionCorrector.html">predict</a></code> </p>
-          </td>
-          <td><p>Predict method for regressionCorrector class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="predict.scaler.html">predict</a></code> </p>
-          </td>
-          <td><p>Scale a dataset using scaler model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="print.regressionCorrector.html">print</a></code> </p>
-          </td>
-          <td><p>Print method for regressionCorrector class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="prop_na.html">prop_na</a></code> </p>
-          </td>
-          <td><p>prop_na</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="regression_corrector.html">regression_corrector</a></code> </p>
-          </td>
-          <td><p>Adds a quick layer of flexible univariate regression to fit any
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="append_time.html">append_time()</a></code> </p>
+        </td>
+        <td><p>Append timestamp to a filepath</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="averageProximity.html">averageProximity()</a></code> </p>
+        </td>
+        <td><p>Compute average proximity matrix on a dataset using randomForest</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="condense.html">condense()</a></code> </p>
+        </td>
+        <td><p>Sample points based on distance matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cor2.html">cor2()</a></code> </p>
+        </td>
+        <td><p>cor2: Compute correlations of columns of a dataframe of mixed types</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="count_na.html">count_na()</a></code> </p>
+        </td>
+        <td><p>count_na</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="count_pattern.html">count_pattern()</a></code> </p>
+        </td>
+        <td><p>count_pattern</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="counts.html">counts()</a></code> </p>
+        </td>
+        <td><p>Obtain counts of an atomic vector as a named integer vector.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cutq.html">cutq()</a></code> </p>
+        </td>
+        <td><p>cutq</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="decodeCharColumns.html">decodeCharColumns()</a></code> </p>
+        </td>
+        <td><p>Decode character columns.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dir_apply.html">dir_apply()</a></code> </p>
+        </td>
+        <td><p>dir_apply: lapply kind of behaviour on files of a directory</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dist_pca.html">dist_pca()</a></code> </p>
+        </td>
+        <td><p>Distance matrix with inter feature(variable) distances based on PCA</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="downsample_majority.html">downsample_majority()</a></code> </p>
+        </td>
+        <td><p>Downsample majority class to the size of minority class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dr_measure.html">dr_measure()</a></code> </p>
+        </td>
+        <td><p>A measure of kNN of original and dimension reduced data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="encodeCharColumns.html">encodeCharColumns()</a></code> </p>
+        </td>
+        <td><p>Encode character columns.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="freq.html">freq()</a></code> </p>
+        </td>
+        <td><p>Obtain frequencies of an atomic vector as proportions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="image2.html">image2()</a></code> </p>
+        </td>
+        <td><p>ggplot2 based alternative for R's 'image'</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="int_approx.html">int_approx()</a></code> </p>
+        </td>
+        <td><p>int_approx</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_vector.html">is_vector()</a></code> </p>
+        </td>
+        <td><p>is_vector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="jaccard_m.html">jaccard_m()</a></code> </p>
+        </td>
+        <td><p>jaccard_m</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="kde2d_tidy.html">kde2d_tidy()</a></code> </p>
+        </td>
+        <td><p>Convert the output of MASS::kde2d output into long format.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loc.html">loc()</a></code> </p>
+        </td>
+        <td><p>classwise local outliers</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mem_cur.html">mem_cur()</a></code> </p>
+        </td>
+        <td><p>current memory usage</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mem_max.html">mem_max()</a></code> </p>
+        </td>
+        <td><p>maximum memory usage</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pcaPlot.html">pcaPlot()</a></code> </p>
+        </td>
+        <td><p>Plot a few principal components</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="peakmem.html">peakmem()</a></code> </p>
+        </td>
+        <td><p>Compute peak memory used by a R script</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="percent_change.html">percent_change()</a></code> </p>
+        </td>
+        <td><p>percent_change</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="predict.regressionCorrector.html">predict(<i>&lt;regressionCorrector&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Predict method for regressionCorrector class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="predict.scaler.html">predict(<i>&lt;scaler&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Scale a dataset using scaler model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.regressionCorrector.html">print(<i>&lt;regressionCorrector&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print method for regressionCorrector class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="prop_na.html">prop_na()</a></code> </p>
+        </td>
+        <td><p>prop_na</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="regression_corrector.html">regression_corrector()</a></code> </p>
+        </td>
+        <td><p>Adds a quick layer of flexible univariate regression to fit any
   regression model to reduce bias.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="remove_duplicate_rows.html">remove_duplicate_rows</a></code> </p>
-          </td>
-          <td><p>Remove duplicate rows considering all or a few columns</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="replace_na.html">replace_na</a></code> </p>
-          </td>
-          <td><p>replace_na</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rm_na.html">rm_na</a></code> </p>
-          </td>
-          <td><p>rm_na</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rotate.html">rotate</a></code> </p>
-          </td>
-          <td><p>rotate</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scaler.html">scaler</a></code> </p>
-          </td>
-          <td><p>Create scaler model</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scaler_.html">scaler_</a></code> </p>
-          </td>
-          <td><p>Constructor for scaler class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sidekicks-package.html">sidekicks-package</a></code> </p>
-          </td>
-          <td><p>sidekicks</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sum_to.html">sum_to</a></code> </p>
-          </td>
-          <td><p>sum_to</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="toString_to_character.html">toString_to_character</a></code> </p>
-          </td>
-          <td><p>Split a long delimted string into individual strings.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="toString_to_characterString.html">toString_to_characterString</a></code> </p>
-          </td>
-          <td><p>Split a long delimted string into individual strings and use then to construct a character vector.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="unique_fraction.html">unique_fraction</a></code> </p>
-          </td>
-          <td><p>unique_fraction</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upsample_minority.html">upsample_minority</a></code> </p>
-          </td>
-          <td><p>Upsample minority class to the size of majority class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="vector_to_tibble.html">vector_to_tibble</a></code> </p>
-          </td>
-          <td><p>vector_to_tibble</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="remove_duplicate_rows.html">remove_duplicate_rows()</a></code> </p>
+        </td>
+        <td><p>Remove duplicate rows considering all or a few columns</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="replace_na.html">replace_na()</a></code> </p>
+        </td>
+        <td><p>replace_na</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rm_na.html">rm_na()</a></code> </p>
+        </td>
+        <td><p>rm_na</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rotate.html">rotate()</a></code> </p>
+        </td>
+        <td><p>rotate</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="scaler.html">scaler()</a></code> </p>
+        </td>
+        <td><p>Create scaler model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="scaler_.html">scaler_()</a></code> </p>
+        </td>
+        <td><p>Constructor for scaler class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sidekicks-package.html">sidekicks-package</a></code> </p>
+        </td>
+        <td><p>sidekicks</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sum_to.html">sum_to()</a></code> </p>
+        </td>
+        <td><p>sum_to</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="toString_to_character.html">toString_to_character()</a></code> </p>
+        </td>
+        <td><p>Split a long delimted string into individual strings.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="toString_to_characterString.html">toString_to_characterString()</a></code> </p>
+        </td>
+        <td><p>Split a long delimted string into individual strings and use then to construct a character vector.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="unique_fraction.html">unique_fraction()</a></code> </p>
+        </td>
+        <td><p>unique_fraction</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="upsample_minority.html">upsample_minority()</a></code> </p>
+        </td>
+        <td><p>Upsample minority class to the size of majority class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vector_to_tibble.html">vector_to_tibble()</a></code> </p>
+        </td>
+        <td><p>vector_to_tibble</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -383,6 +396,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

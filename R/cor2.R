@@ -22,12 +22,12 @@
 #' @param nproc Number of parallel processes to use
 #' @return  A simil/dist object.
 #' @examples
-#' iris_cor <- cor2(iris, nproc = 1)
+#' iris_cor <- cor2(iris)
 #' iris_cor <- cor2(iris)
 #' @export
 
 cor2 = function(df
-                , nproc = parallel::detectCores()
+                , nproc = 1
                 ){
 
   stopifnot(inherits(df, "data.frame"))
@@ -94,10 +94,11 @@ cor2 = function(df
     as.matrix()
 
   # parallel process using futures
-  vec <- pbapply::pbsapply(1:nrow(grid)
-                           , function(x) cor_fun(grid[x, 1], grid[x,2])
-                           , cl = nproc
-                           )
+  vec <- pbmcapply::pbmclapply(1:nrow(grid)
+                               , function(x) cor_fun(grid[x, 1], grid[x,2])
+                               , mc.cores = nproc
+                               ) %>%
+    unlist()
   class(vec)         <- c("dist", "simil")
   attr(vec, "Size")  <- ncol(df)
   attr(vec, "diag")  <- FALSE

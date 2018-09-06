@@ -1,6 +1,6 @@
 Package: sidekicks
 Title: A Misc Set of Functions for Data Analysis
-Version: 0.1.13
+Version: 0.1.14
 Authors@R: person("KS", "Srikanth", email = "sri.teach@gmail.com", role = c("aut", "cre"))
 Description: A misc set of functions used often during data analysis.
 Depends:
@@ -24,7 +24,9 @@ Imports:
     base64enc (>= 0.1.3),
     tidyr (>= 0.8.0),
     parallelDist (>= 0.2.1),
-    pbapply(>= 1.3.4),
+    pbmcapply(>= 1.2.5),
+    processx (>= 2.0.0.1),
+    stringr (>= 1.3.0),
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

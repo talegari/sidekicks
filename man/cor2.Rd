@@ -4,7 +4,7 @@
 \alias{cor2}
 \title{cor2: Compute correlations of columns of a dataframe of mixed types}
 \usage{
-cor2(df, nproc = parallel::detectCores())
+cor2(df, nproc = 1)
 }
 \arguments{
 \item{df}{input data frame}
@@ -38,6 +38,6 @@ Pairwise complete observations are used to compute correlation.
 For a comprehensive implementation, use `polycor::hetcor`
 }
 \examples{
-iris_cor <- cor2(iris, nproc = 1)
+iris_cor <- cor2(iris)
 iris_cor <- cor2(iris)
 }

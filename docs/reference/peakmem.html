@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Upsample minority class to the size of majority class — upsample_minority • sidekicks</title>
+<title>Compute peak memory used by a R script — peakmem • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,20 @@
 
 
 
-<meta property="og:title" content="Upsample minority class to the size of majority class — upsample_minority" />
+<meta property="og:title" content="Compute peak memory used by a R script — peakmem" />
 
-<meta property="og:description" content="Upsamples the minority class in binary classification setting to
-  the size of majority class by randomly selecting minority class with
-  repition to match the number of majority class" />
+<meta property="og:description" content="The function runs the script using Rscript program in a
+  different process and uses a python utility 'memusg'
+  (https://github.com/jhclark/memusg/) to measure the peak memory usage by
+  the prcocess and its child processes. This will be helpful in measuring the
+  memory usage of code involving parallel processing. For example, code
+  involving [parallel](mclapply) call. Place the 'memusg.py'
+  file in '/usr/local/bin' directory and make it executable. The function is
+  meant to measure peak memory utility in the order of GBs with long running
+  parallel processes. For smaller processes, the overhead itself will distort
+  the real usage. For smaller benchmarks, use [bench]mark or
+  [peakRAM]peakRAM. For more details, its better to modify
+  the python program." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -94,65 +103,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Upsample minority class to the size of majority class</h1>
+    <h1>Compute peak memory used by a R script</h1>
     
-    <div class="hidden name"><code>upsample_minority.Rd</code></div>
+    <div class="hidden name"><code>peakmem.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Upsamples the minority class in binary classification setting to
-  the size of majority class by randomly selecting minority class with
-  repition to match the number of majority class</p>
+    <p>The function runs the script using Rscript program in a
+  different process and uses a python utility 'memusg'
+  (https://github.com/jhclark/memusg/) to measure the peak memory usage by
+  the prcocess and its child processes. This will be helpful in measuring the
+  memory usage of code involving parallel processing. For example, code
+  involving <code>[parallel](mclapply)</code> call. Place the 'memusg.py'
+  file in '/usr/local/bin' directory and make it executable. The function is
+  meant to measure peak memory utility in the order of GBs with long running
+  parallel processes. For smaller processes, the overhead itself will distort
+  the real usage. For smaller benchmarks, use <code>[bench]mark</code> or
+  <code>[peakRAM]peakRAM</code>. For more details, its better to modify
+  the python program.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>upsample_minority</span>(<span class='no'>x</span>, <span class='no'>classVarName</span>, <span class='no'>arrangeVarName</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>shuffle</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>peakmem</span>(<span class='no'>file</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A dataframe</p></td>
+      <th>file</th>
+      <td><p>Location of script</p></td>
     </tr>
     <tr>
-      <th>classVarName</th>
-      <td><p>Name of the binary class column</p></td>
-    </tr>
-    <tr>
-      <th>arrangeVarName</th>
-      <td><p>Name of the variable to arrange by</p></td>
-    </tr>
-    <tr>
-      <th>seed</th>
-      <td><p>Seed chosen for sampling, defaults to 100</p></td>
-    </tr>
-    <tr>
-      <th>shuffle</th>
-      <td><p>Whether to shuffle the dataframe at the end. This cannot be
-TRUE when arrangeVarName is specified. Shuffle used the seed value seed +
-1.</p></td>
+      <th>timeout</th>
+      <td><p>Timeout for the process, in seconds, or as a difftime object.
+If it is not finished before this, it will be killed.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>iris2</span>         <span class='kw'>&lt;-</span> <span class='no'>iris</span>[<span class='fu'>c</span>(<span class='fl'>1</span>:<span class='fl'>25</span>, <span class='fl'>51</span>:<span class='fl'>100</span>), ]
-<span class='no'>iris2</span>$<span class='no'>Species</span> <span class='kw'>&lt;-</span> <span class='fu'>factor</span>(<span class='no'>iris2</span>$<span class='no'>Species</span>)
-<span class='no'>sampled</span> <span class='kw'>&lt;-</span> <span class='fu'>upsample_minority</span>(<span class='no'>iris2</span>, <span class='st'>"Species"</span>)
-<span class='fu'>table</span>(<span class='no'>sampled</span>$<span class='no'>Species</span>)</div><div class='output co'>#&gt; 
-#&gt;     setosa versicolor 
-#&gt;         50         50 </div></pre>
+    <p>Maximum memory used in GB</p>
+    
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
