@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute peak memory used by a R script — peakmem • sidekicks</title>
+<title>Linear interpolation of a vector — na_approx • sidekicks</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,19 +27,11 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Compute peak memory used by a R script — peakmem" />
+<meta property="og:title" content="Linear interpolation of a vector — na_approx" />
 
-<meta property="og:description" content="The function runs the script using Rscript program in a
-  different process and uses a python utility 'memusg'
-  (https://github.com/jhclark/memusg/) to measure the peak memory usage by
-  the prcocess and its child processes. This will be helpful in measuring the
-  memory usage of code involving parallel processing. For example, code
-  involving `parallel::mclapply` call. Place the 'memusg.py' file in
-  '/usr/local/bin' directory and make it executable. The function is meant to
-  measure peak memory utility in the order of GBs with long running parallel
-  processes. For smaller processes, the overhead itself will distort the real
-  usage. For smaller benchmarks, use `benck::mark` or `peakRAM::peakRAM`. For
-  more details, its better to modify the python program." />
+<meta property="og:description" content="Linear interpolation of NAs in a vector using `zoo::na.approx`.
+  The NAs at the beginning or at the end are replaced by their first non NA
+  neighbour" />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -91,44 +83,33 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute peak memory used by a R script</h1>
+    <h1>Linear interpolation of a vector</h1>
     </div>
 
     
-    <p>The function runs the script using Rscript program in a
-  different process and uses a python utility 'memusg'
-  (https://github.com/jhclark/memusg/) to measure the peak memory usage by
-  the prcocess and its child processes. This will be helpful in measuring the
-  memory usage of code involving parallel processing. For example, code
-  involving `parallel::mclapply` call. Place the 'memusg.py' file in
-  '/usr/local/bin' directory and make it executable. The function is meant to
-  measure peak memory utility in the order of GBs with long running parallel
-  processes. For smaller processes, the overhead itself will distort the real
-  usage. For smaller benchmarks, use `benck::mark` or `peakRAM::peakRAM`. For
-  more details, its better to modify the python program.</p>
+    <p>Linear interpolation of NAs in a vector using `zoo::na.approx`.
+  The NAs at the beginning or at the end are replaced by their first non NA
+  neighbour</p>
     
 
-    <pre class="usage"><span class='fu'>peakmem</span>(<span class='no'>file</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</pre>
+    <pre class="usage"><span class='fu'>na_approx</span>(<span class='no'>vec</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>Location of script</p></td>
-    </tr>
-    <tr>
-      <th>timeout</th>
-      <td><p>Timeout for the process, in seconds, or as a difftime object.
-If it is not finished before this, it will be killed.</p></td>
+      <th>vec</th>
+      <td><p>A numeric vector with NAs</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Maximum memory used in GB</p>
+    <p>A numeric vector without NA</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>na_approx</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>NA</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>NA</span>))</div><div class='output co'>#&gt; [1] 2 2 3 4 5 6 6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -136,7 +117,9 @@ If it is not finished before this, it will be killed.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
